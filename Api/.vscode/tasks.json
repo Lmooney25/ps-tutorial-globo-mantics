@@ -33,9 +33,16 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/Api.csproj"
+                "${workspaceFolder}/Api.csproj",
+                "--urls",
+                "https://localhost:4000"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
         }
     ]
 }
