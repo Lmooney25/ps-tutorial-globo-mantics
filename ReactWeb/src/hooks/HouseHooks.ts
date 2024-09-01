@@ -1,22 +1,16 @@
-import { useEffect, useState } from "react";
 import { House } from "../types/House";
 import config from "../config";
+import axios, { AxiosError } from "axios";
+import { useQuery } from "@tanstack/react-query";
 
-const useFetchHouses = (): House[] => {
-    const [houses, setHouses] = useState<House[]>([]);
+const useFetchHouses = () => {
 
-    // Fetch houses from the API when the component mounts/ first appears on the screen.
-    useEffect(() => {
-        const fetchHouses = async () => {
-            const rsp = await fetch(`${config.baseApiUrl}/houses`);
-            const houses = await rsp.json();
-            setHouses(houses);
-        }
+    return useQuery<House[], AxiosError>({
+        queryKey: ["houses"],
+        queryFn: () =>
+            axios.get(`${config.baseApiUrl}/houses`).then((rsp) => rsp.data),
+    });
 
-        fetchHouses();
-    }, []);
-
-    return houses;
 }
 
 export default useFetchHouses;
