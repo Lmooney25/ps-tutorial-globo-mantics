@@ -1,1 +1,1 @@
-public record HouseDto(int Id, string? Address, string? Country, string? Description, int Price, string? Photo);
+public record HouseDto(int Id, string? Address, string? Country, int Price);

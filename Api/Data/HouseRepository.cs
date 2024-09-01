@@ -16,9 +16,24 @@ public class HouseRepository : IHouseRepository
             house.Id,
             house.Address,
             house.Country,
-            house.Description,
-            house.Price,
-            house.Photo
+            house.Price
         )).ToListAsync(); // Will automatically be converted to JSON.
+    }
+
+    public async Task<HouseDetailDto?> GetByIdAsync(int id)
+    {
+        var entity = await this.context.Houses.SingleOrDefaultAsync(house => house.Id == id);
+        if (entity == null)
+        {
+            return null;
+        }
+        return new HouseDetailDto(
+            entity.Id,
+            entity.Address,
+            entity.Country,
+            entity.Price,
+            entity.Description,
+            entity.Photo
+        );
     }
 }
